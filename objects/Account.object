@@ -14,7 +14,7 @@
                     <default>false</default>
                     <label>No</label>
                 </value>
-                <value>
+                <value> 
                     <fullName>Yes</fullName>
                     <default>false</default>
                     <label>Yes</label>
