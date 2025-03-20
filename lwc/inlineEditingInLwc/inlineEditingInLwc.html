@@ -1,0 +1,313 @@
+<template>
+	<lightning-card>
+		<!-- #################### Description ################## -->
+		<div>
+			<h1 style="text-align:center;font-weight:bold;font-size:18px;">Inline Editing In LWC</h1>
+			<h1 style="text-align:center;padding-bottom:12px;">By Sfdcfamily.blogspot.com</h1>
+		</div>
+		<!-- ######################################## -->
+		<!-- #################### Loading Spinner #################### -->
+		<template if:true={isLoading}>
+			<lightning-spinner variant="brand" size="small">
+			</lightning-spinner>
+		</template>
+		<!-- ######################################## -->
+
+		<lightning-layout>
+			<lightning-layout-item size="12">
+				<!-- #################### Custom Table Start #################### -->
+				<table class="slds-table slds-table_cell-buffer slds-table_bordered">
+
+					<!-- #################### Table Header Start #################### -->
+					<thead>
+						<tr class="slds-line-height_reset slds-gutters">
+							<th class="slds-col" scope="col">
+								<div class="slds-truncate c__headerWidth" title="Account Name">Account Name</div>
+							</th>
+							<th class="slds-col" scope="col">
+								<div class="slds-truncate">Account Number</div>
+							</th>
+							<th class="slds-col" scope="col">
+								<div class="slds-truncate">Type</div>
+							</th>
+							<th class="slds-col" scope="col">
+								<div class="slds-truncate">Industry</div>
+							</th>
+							<th class="slds-col" scope="col">
+								<div class="slds-truncate">Phone</div>
+							</th>
+							<th class="slds-col" scope="col">
+								<div class="slds-truncate">Active</div>
+							</th>
+						</tr>
+					</thead>
+					<!-- #################### Table Header End #################### -->
+					<!-- #################### Table Body Start #################### -->
+					<tbody>
+						<template for:each={lstRecords} for:item="rec" for:index="indx">
+							<tr class="slds-hint-parent slds-wrap" key={rec.Id}>
+								<!--####################  Name Td Start #################### -->
+								<td role="" onmouseover={handleMouseover} onmouseout={handleMouseOut}
+									data-colname="Name" data-recid={rec.Id} data-rowindx={indx}
+									class={rec.manageEdit.c_Name}>
+
+									<!--####################  Viem Mode #################### -->
+									<template if:false={rec.manageEdit.Name}>
+										<span class="slds-grid slds-grid--align-spread forceInlineEditCell"
+											onmouseover={handleMouseover} onmouseout={handleMouseOut}
+											data-colname="Name" data-recid={rec.Id} data-rowindx={indx}>
+											<span onmouseover={handleMouseover} onmouseout={handleMouseOut}
+												data-colname="Name" data-recid={rec.Id} data-rowindx={indx}
+												class="slds-truncate" title={rec.Name}>{rec.Name}</span>
+											<span class={rec.displayEditIcon.Name}>
+												<button data-colname="Name" onclick={handleEdit} data-recid={rec.Id}
+													data-rowindx={indx}
+													class="slds-button slds-button_icon slds-cell-edit__button c__editButtonCss"
+													tabindex="0">
+													<lightning-icon data-colname="Name" data-recid={rec.Id}
+														data-rowindx={indx} size="xx-small" icon-name="utility:edit"
+														alternative-text="editIcon">
+													</lightning-icon>
+												</button>
+											</span>
+										</span>
+									</template>
+									<!-- ################################ -->
+
+									<!--####################  Edit Mode #################### -->
+									<template if:true={rec.manageEdit.Name}>
+										<lightning-input class="clsName" data-colname="Name" data-recid={rec.Id}
+											data-rowindx={indx} label="Account Name" variant="label-hidden"
+											value={rec.Name} onchange={handleInputChange} onblur={handleBlur}
+											onfocusout={handleFocusout}>
+										</lightning-input>
+									</template>
+									<!-- ################################ -->
+								</td>
+
+								<!--####################  Name Td End #################### -->
+
+								<!--####################  AccountNumber Td Start #################### -->
+								<td role="" onmouseover={handleMouseover} onmouseout={handleMouseOut}
+									data-colname="AccountNumber" data-recid={rec.Id} data-rowindx={indx}
+									class={rec.manageEdit.c_AccountNumber}>
+									<!--####################  Viem Mode #################### -->
+									<template if:false={rec.manageEdit.AccountNumber}>
+										<span class="slds-grid slds-grid--align-spread forceInlineEditCell"
+											onmouseover={handleMouseover} onmouseout={handleMouseOut}
+											data-colname="AccountNumber" data-recid={rec.Id} data-rowindx={indx}>
+											<span onmouseover={handleMouseover} onmouseout={handleMouseOut}
+												data-colname="AccountNumber" data-recid={rec.Id} data-rowindx={indx}
+												class="slds-truncate" title={rec.Name}>{rec.AccountNumber}</span>
+											<span class={rec.displayEditIcon.AccountNumber}>
+												<button data-colname="AccountNumber" onclick={handleEdit}
+													data-recid={rec.Id} data-rowindx={indx}
+													class="slds-button slds-button_icon slds-cell-edit__button c__editButtonCss"
+													tabindex="0">
+													<lightning-icon data-colname="AccountNumber" data-recid={rec.Id}
+														data-rowindx={indx} size="xx-small" icon-name="utility:edit"
+														alternative-text="editIcon">
+													</lightning-icon>
+												</button>
+											</span>
+										</span>
+									</template>
+									<!-- ################################ -->
+
+									<!--####################  Edit Mode #################### -->
+									<template if:true={rec.manageEdit.AccountNumber}>
+										<lightning-input class="clsAccountNumber" data-colname="AccountNumber"
+											data-recid={rec.Id} data-rowindx={indx} label="Account Number"
+											variant="label-hidden" value={rec.AccountNumber}
+											onchange={handleInputChange} onblur={handleBlur}
+											onfocusout={handleFocusout}>
+										</lightning-input>
+									</template>
+									<!-- ################################ -->
+								</td>
+								<!--####################  AccountNumber Td End #################### -->
+
+								<!--####################  Type Td Start #################### -->
+								<td role="" onmouseover={handleMouseover} onmouseout={handleMouseOut}
+									data-colname="Type" data-recid={rec.Id} data-rowindx={indx}
+									class={rec.manageEdit.c_Type}>
+									<!--####################  Viem Mode #################### -->
+									<template if:false={rec.manageEdit.Type}>
+										<span class="slds-grid slds-grid--align-spread forceInlineEditCell"
+											onmouseover={handleMouseover} onmouseout={handleMouseOut}
+											data-colname="Type" data-recid={rec.Id} data-rowindx={indx}>
+											<span onmouseover={handleMouseover} onmouseout={handleMouseOut}
+												data-colname="Type" data-recid={rec.Id} data-rowindx={indx}
+												class="slds-truncate" title={rec.Type}>{rec.Type}</span>
+											<span class={rec.displayEditIcon.Type}>
+												<button data-colname="Type" data-recid={rec.Id} data-rowindx={indx}
+													onclick={handleEdit}
+													class="slds-button slds-button_icon slds-cell-edit__button c__editButtonCss"
+													tabindex="0">
+													<lightning-icon data-colname="Type" data-recid={rec.Id}
+														data-rowindx={indx} size="xx-small" icon-name="utility:edit"
+														alternative-text="editIcon">
+													</lightning-icon>
+												</button>
+											</span>
+										</span>
+									</template>
+									<!-- ################################ -->
+
+									<!--####################  Edit Mode #################### -->
+									<template if:true={rec.manageEdit.Type}>
+										<lightning-record-edit-form record-id={rec.Id} object-api-name="Account"
+											onsuccess={handleSuccess} onsubmit={handleSubmit}>
+											<lightning-input-field field-name="Type" class="clsType" tabindex="0"
+												onblur={handleBlur} onfocusout={handleFocusout} data-rowindx={indx}
+												data-colname="Type" data-recid={rec.Id} onchange={handleInputChange}>
+											</lightning-input-field>
+										</lightning-record-edit-form>
+									</template>
+									<!-- ################################ -->
+
+								</td>
+								<!--####################  Type Td End #################### -->
+
+								<!--####################  Industry Td Start #################### -->
+								<td role="" onmouseover={handleMouseover} onmouseout={handleMouseOut}
+									data-colname="Industry" data-recid={rec.Id} data-rowindx={indx}
+									class={rec.manageEdit.c_Industry}>
+									<!--####################  Viem Mode #################### -->
+									<template if:false={rec.manageEdit.Industry}>
+										<span class="slds-grid slds-grid--align-spread forceInlineEditCell"
+											onmouseover={handleMouseover} onmouseout={handleMouseOut}
+											data-colname="Industry" data-recid={rec.Id} data-rowindx={indx}>
+											<span onmouseover={handleMouseover} onmouseout={handleMouseOut}
+												data-colname="Industry" data-recid={rec.Id} data-rowindx={indx}
+												class="slds-truncate" title={rec.Industry}>{rec.Industry}</span>
+											<span class={rec.displayEditIcon.Industry}>
+												<button data-colname="Industry" data-recid={rec.Id} data-rowindx={indx}
+													onclick={handleEdit}
+													class="slds-button slds-button_icon slds-cell-edit__button c__editButtonCss"
+													tabindex="0">
+													<lightning-icon data-colname="Industry" data-recid={rec.Id}
+														data-rowindx={indx} size="xx-small" icon-name="utility:edit"
+														alternative-text="editIcon">
+													</lightning-icon>
+												</button>
+											</span>
+										</span>
+									</template>
+									<!-- ################################ -->
+
+									<!--####################  Edit Mode #################### -->
+									<template if:true={rec.manageEdit.Industry}>
+										<lightning-record-edit-form record-id={rec.Id} object-api-name="Account"
+											onsuccess={handleSuccess} onsubmit={handleSubmit}>
+											<lightning-input-field field-name="Industry" class="clsIndustry"
+												tabindex="0" onblur={handleBlur} onfocusout={handleFocusout}
+												data-rowindx={indx} data-colname="Industry" data-recid={rec.Id}
+												onchange={handleInputChange}>
+											</lightning-input-field>
+										</lightning-record-edit-form>
+									</template>
+									<!-- ################################ -->
+								</td>
+								<!--####################  Industry Td End #################### -->
+
+								<!--####################  Phone Td Start #################### -->
+								<td role="" onmouseover={handleMouseover} onmouseout={handleMouseOut}
+									data-colname="Phone" data-recid={rec.Id} data-rowindx={indx}
+									class={rec.manageEdit.c_Phone}>
+									<!--####################  Viem Mode #################### -->
+									<template if:false={rec.manageEdit.Phone}>
+										<span class="slds-grid slds-grid--align-spread forceInlineEditCell"
+											onmouseover={handleMouseover} onmouseout={handleMouseOut}
+											data-colname="Phone" data-recid={rec.Id} data-rowindx={indx}>
+											<span onmouseover={handleMouseover} onmouseout={handleMouseOut}
+												data-colname="Phone" data-recid={rec.Id} data-rowindx={indx}
+												class="slds-truncate" title={rec.Phone}>{rec.Phone}</span>
+											<span class={rec.displayEditIcon.Phone}>
+												<button data-colname="Phone" data-recid={rec.Id} data-rowindx={indx}
+													onclick={handleEdit}
+													class="slds-button slds-button_icon slds-cell-edit__button c__editButtonCss"
+													tabindex="0">
+													<lightning-icon data-colname="Phone" data-recid={rec.Id}
+														data-rowindx={indx} size="xx-small" icon-name="utility:edit"
+														alternative-text="editIcon">
+													</lightning-icon>
+												</button>
+											</span>
+										</span>
+									</template>
+									<!-- ################################ -->
+
+									<!--####################  Edit Mode #################### -->
+									<template if:true={rec.manageEdit.Phone}>
+										<lightning-input class="clsPhone" data-colname="Phone" data-recid={rec.Id}
+											data-rowindx={indx} label="Phone" variant="label-hidden" value={rec.Phone}
+											onchange={handleInputChange} onblur={handleBlur}
+											onfocusout={handleFocusout}>
+										</lightning-input>
+									</template>
+									<!-- ################################ -->
+								</td>
+								<!--####################  Phone Td End #################### -->
+
+								<!--####################  Active__c Td Start #################### -->
+								<td role="" onmouseover={handleMouseover} onmouseout={handleMouseOut}
+									data-colname="Active__c" data-recid={rec.Id} data-rowindx={indx}
+									class={rec.manageEdit.c_Active__c}>
+									<!--####################  Viem Mode #################### -->
+									<template if:false={rec.manageEdit.Active__c}>
+										<span class="slds-grid slds-grid--align-spread forceInlineEditCell"
+											onmouseover={handleMouseover} onmouseout={handleMouseOut}
+											data-colname="Active__c" data-recid={rec.Id} data-rowindx={indx}>
+											<span onmouseover={handleMouseover} onmouseout={handleMouseOut}
+												data-colname="Active__c" data-recid={rec.Id} data-rowindx={indx}
+												class="slds-truncate" title={rec.Active__c}>{rec.Active__c}</span>
+											<span class={rec.displayEditIcon.Active__c}>
+												<button data-colname="Active__c" data-recid={rec.Id} data-rowindx={indx}
+													onclick={handleEdit}
+													class="slds-button slds-button_icon slds-cell-edit__button c__editButtonCss"
+													tabindex="0">
+													<lightning-icon data-colname="Active__c" data-recid={rec.Id}
+														data-rowindx={indx} size="xx-small" icon-name="utility:edit"
+														alternative-text="editIcon">
+													</lightning-icon>
+												</button>
+											</span>
+										</span>
+									</template>
+									<!-- ################################ -->
+
+									<!--####################  Edit Mode #################### -->
+									<template if:true={rec.manageEdit.Active__c}>
+										<lightning-record-edit-form record-id={rec.Id} object-api-name="Account"
+											onsuccess={handleSuccess} onsubmit={handleSubmit}>
+											<lightning-input-field field-name="Active__c" class="clsActive__c"
+												tabindex="0" onblur={handleBlur} onfocusout={handleFocusout}
+												data-rowindx={indx} data-colname="Active__c" data-recid={rec.Id}
+												onchange={handleInputChange}>
+											</lightning-input-field>
+										</lightning-record-edit-form>
+									</template>
+									<!-- ################################ -->
+								</td>
+								<!--####################  Active__c Td End #################### -->
+							</tr>
+						</template>
+					</tbody>
+					<!-- #################### Table Body End #################### -->
+				</table>
+				<!-- #################### Custom Table End #################### -->
+
+				<!-- #################### Footer Start #################### -->
+				<div if:true={displayFooter} class="c_footer">
+					<div class="slds-modal__footer">
+						<button class="slds-button slds-button_neutral" aria-label="Cancel and close"
+							onclick={handleCancel}>Cancel</button>
+						<button class="slds-button slds-button_brand" onclick={handleSave}>Save</button>
+					</div>
+				</div>
+				<!-- #################### Footer End #################### -->
+			</lightning-layout-item>
+		</lightning-layout>
+	</lightning-card>
+</template>

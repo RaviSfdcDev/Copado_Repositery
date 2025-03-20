@@ -1,0 +1,21 @@
+.c__tdBackgroundColor {
+	background: rgb(250, 255, 189);
+}
+
+.c_footer {
+	position: sticky !important;
+	bottom: 0 !important;
+}
+
+.slds-modal__footer {
+	text-align: center !important;
+}
+
+.c__iconHidden {
+	visibility: hidden;
+}
+
+.c__editButtonCss {
+	float: right;
+	opacity: 0.6;
+}
